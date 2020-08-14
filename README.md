@@ -1,4 +1,4 @@
-# **Finding Lane Lines on the Road** 
+# **Lane Detection** 
 
 <img src="examples/laneLines_thirdPass.jpg" width="480" alt="Combined Image" />
 
@@ -11,8 +11,8 @@ In this project, lane lines are detected using Python and OpenCV.
 
 Pipeline
 ---
-The pipeline I used consist of 5 steps.
-1. Convert the images to grayscale to reduce the number of channels.
+The pipeline I used consist of 7 steps.
+1. Convert the images to grayscale to reduce the number of channels (save computation power).
 <p align="center">
   <img src="images/gray.png"
   >
@@ -32,7 +32,7 @@ The pipeline I used consist of 5 steps.
   >
 </p>
 
-- where w represent the class probability (the summartion of the probabilities of all pixels in the class) and sigma represent the class variance.
+- where w represents the class probability (the summartion of the probabilities of all pixels in the class) and sigma represents the class variance.
 <p align="center">
   <img src="images/edges.png"
   >
@@ -44,7 +44,7 @@ The pipeline I used consist of 5 steps.
   >
 </p>
 
-5. Use [Hough Transform](https://towardsdatascience.com/lines-detection-with-hough-transform-84020b3b1549) to find the lines. This is a lot more efficient and robust to noise than search for line at every possible position/orientation. Time complexity of the former is O(# of pixels) vs time complexity of the latter is O(# of pixels * # of directions).
+5. Use [Hough Transform](https://towardsdatascience.com/lines-detection-with-hough-transform-84020b3b1549) to find the lines. This is a lot more efficient and robust to noise than search for line at every possible position/orientation. Time complexity of the former is O(# of lane pixels) vs time complexity of the latter is O(# of lane pixels * # of directions).
 - A straight line could be represented by 2 parameters (slope and y-int). However, if the line is vertical, the slope would be inf and this would cause problems. So instead, we use rho and theta to represent a straight line.
 <p align="center">
   <img src="images/hough_transform.png"
@@ -63,7 +63,7 @@ The pipeline I used consist of 5 steps.
   >
 </p>
 
-6. Convert lines to a left and right lane. This involves 2 steps. 1) assign each line to a 'left' or a 'right' group. 2) remove outliers, one algorithm could be [RANSAC](https://medium.com/@iamhatesz/random-sample-consensus-bd2bb7b1be75).
+6. Separate the lines into 2 groups (left and right lane) and remove outliers in each group, one such algorithm could be [RANSAC](https://medium.com/@iamhatesz/random-sample-consensus-bd2bb7b1be75).
 <p align="center">
   <img src="images/lanes.png"
   >
@@ -77,9 +77,10 @@ The pipeline I used consist of 5 steps.
 
 Results
 ---
-<video height="240" controls>
-  <source src="test_videos_output/solidYellowLeft.mp4">
-</video>
+<p align="center">
+  <img src="images/example_output.gif" width=600><br/>
+  <i>Lane detection demo</i>
+</p>
 
 Room for improvements (next steps)
 ---
