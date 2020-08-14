@@ -1,6 +1,9 @@
 # **Lane Detection** 
 
-<img src="examples/laneLines_thirdPass.jpg" width="480" alt="Combined Image" />
+<p align="center">
+  <img src="images/example_output.gif" width=600><br/>
+  <i>Lane detection demo</i>
+</p>
 
 Overview
 ---
@@ -73,13 +76,6 @@ The pipeline I used consist of 7 steps.
 <p align="center">
   <img src="images/final.png"
   >
-</p>
-
-Results
----
-<p align="center">
-  <img src="images/example_output.gif" width=600><br/>
-  <i>Lane detection demo</i>
 </p>
 
 Room for improvements (next steps)
